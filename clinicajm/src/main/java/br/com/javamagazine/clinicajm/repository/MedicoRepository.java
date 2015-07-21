@@ -12,6 +12,13 @@ import org.springframework.stereotype.Repository;
 import br.com.javamagazine.clinicajm.domain.Medico;
 import br.com.javamagazine.clinicajm.enumeration.Especialidade;
 
+/**
+ * será responsável por realizar as operações que dizem respeito aos medicos no
+ * banco de dados.
+ * 
+ * @author Jaime Gomes
+ *
+ */
 @Repository
 public class MedicoRepository {
 
