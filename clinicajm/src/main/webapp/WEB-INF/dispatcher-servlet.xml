@@ -3,18 +3,46 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 09 http://www.springframework.org/schema/beans/spring-beans.xsd 10 http://www.springframework.org/schema/context 11 http://www.springframework.org/schema/context/spring-context.xsd 12 http://www.springframework.org/schema/tx 13 http://www.springframework.org/schema/tx/spring-tx.xsd 14 http://www.springframework.org/schema/mvc 15 http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	 http://www.springframework.org/schema/beans/spring-beans.xsd 
+	 http://www.springframework.org/schema/context 
+	 http://www.springframework.org/schema/context/spring-context.xsd 
+	 http://www.springframework.org/schema/tx 
+	 http://www.springframework.org/schema/tx/spring-tx.xsd 
+	 http://www.springframework.org/schema/mvc 
+	 http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+	<!-- informa que o Spring MVC deve procurar componentes injetáveis a partir 
+		do pacote br.com.javamagazine.clinicajm -->
 	<context:component-scan base-package="br.com.javamagazine.clinicajm" />
+
+	<!-- define que os controllers da aplicação serão definidos através de anotação -->
 	<mvc:annotation-driven />
 
+	<!-- informa que a EntityManagerFactory (utilizada para se conseguir uma 
+		instância do EntityManager) será gerenciada pela LocalEntityManagerFactoryBean, 
+		uma classe do Spring -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" />
+
+	<!-- informa que o gerenciamento de transações com o banco de dados será 
+		feito pela classe JPATransactionManager, uma vez que utilizaremos a JPA para 
+		o acesso -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
+	<!-- define que o controle de transações será feito através de anotações -->
 	<tx:annotation-driven />
+
+
+	<!-- no Spring MVC, precisamos de um viewResolver para direcionar o usuário 
+		para uma tela após a execução da lógica no controller. A classe UrlBasedViewResolver, 
+		na linha 47, é útil quando o nome dos arquivos das páginas é igual à String 
+		de retorno dos métodos (veremos mais à frente que os métodos dos nossos controllers 
+		se comportarão desta forma). Na linha 49 informamos que nossas telas serão 
+		páginas JSP usando tags JSTL. Nas linhas 50 e 51 definimos que nossas páginas 
+		terão a extensão “.jsp” e que ficarão na pasta WEB-INF/jsp -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"

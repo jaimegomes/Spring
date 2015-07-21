@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<!-- na linha 10 informamos que temos um layout padrão disponível para as 
+	páginas do sistema utilizarem – chamado template.jsp –, o qual recebeu, através 
+	do atributo name, o nome de template. Isto significa que template.jsp terá 
+	algumas estruturas que são comuns a várias páginas do sistema (como cabeçalho 
+	e menu). -->
+<tiles-definitions>
+	<definition name="template" template="/template.jsp">
+	</definition>
+</tiles-definitions>
+
+<!-- Nesta configuração a biblioteca Tiles se encarrega de injetar o código 
+	do template nas páginas que o utilizam, evitando a repetição de código em 
+	todas as views do sistema que seguem o mesmo padrão de layout -->
