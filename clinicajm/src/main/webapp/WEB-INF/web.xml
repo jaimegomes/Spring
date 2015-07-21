@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+		id="WebApp_ID" version="3.1">
+
+		<display-name>clinicajm</display-name>
+
+		<!-- Página Inicial do Sistema -->
+		<welcome-file-list>
+			<welcome-file>index.jsp</welcome-file>
+		</welcome-file-list>
+
+		<!-- registra a classe DispatcherServlet como Front Controller da nossa 
+			aplicação e informa que ela deve ser carregada no momento em que o sistema 
+			subir -->
+
+		<servlet>
+			<servlet-name>dispatcher</servlet-name>
+			<servlet-class>org.springframework.web.servlet.DispatcherServlet
+			</servlet-class>
+			<load-on-startup>1</load-on-startup>
+		</servlet>
+
+		<!-- informa que as requisições a serem processadas pelo Front Controller 
+			DispatcherServlet devem seguir o pattern “*.do” -->
+		<servlet-mapping>
+			<servlet-name>dispatcher</servlet-name>
+			<url-pattern>*.do</url-pattern>
+		</servlet-mapping>
+
+		<!-- configura o listener do Tiles com a classe SimpleTilesListener. Entre 
+			outras ações ele lê o arquivo WEB-INF/tiles.xml, fornecendo suporte para 
+			JSP, Servlets e Portlets, o que já atende nossos requisitos, uma vez que 
+			utilizaremos apenas templates nas páginas JSP -->
+		<listener>
+			<listener-class>
+				org.apache.tiles.web.startup.simple.SimpleTilesListener
+			</listener-class>
+		</listener>
+	</web-app>
+
