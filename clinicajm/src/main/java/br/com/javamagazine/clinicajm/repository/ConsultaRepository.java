@@ -44,4 +44,15 @@ public class ConsultaRepository {
 		query.setParameter("idPaciente", idPaciente);
 		return query.getResultList();
 	}
+
+	public boolean hasConsulta(Integer idMedico) {
+		Query query = entityManager
+				.createQuery("Select c from Consulta c where c.medico.id=:idMedico order by c.dataConsulta");
+		query.setParameter("idMedico", idMedico);
+
+		if (query.getResultList().size() > 0) {
+			return true;
+		}
+		return false;
+	}
 }

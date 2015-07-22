@@ -84,13 +84,12 @@ public class PacienteController {
 					"mensagem",
 					new Mensagem(
 							"Erro ao excluir o paciente, este paciente possui consultas registradas em seu nome.",
-							TipoMensagem.SUCESSO));
+							TipoMensagem.ERRO));
 		} else {
 			pacienteRepository.excluiPaciente(idPaciente);
 			model.addAttribute("mensagem", new Mensagem(
-					"Sucesso ao excluir o paciente", TipoMensagem.ERRO));
+					"Sucesso ao excluir o paciente", TipoMensagem.SUCESSO));
 		}
-		
 		return "forward:/paciente/listar.do";
 	}
 }
