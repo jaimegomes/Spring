@@ -21,10 +21,25 @@ public class PacienteController {
 
 	@RequestMapping(value = "/cadastrar.do", method = RequestMethod.POST)
 	public String cadastrar(Paciente paciente, Model model) {
-		pacienteRepository.salvaPaciente(paciente);
-		model.addAttribute("paciente", new Paciente());
-		model.addAttribute("mensagem", new Mensagem(
-				"Sucesso ao cadastrar o paciente", TipoMensagem.SUCESSO));
+		
+		if(paciente.getNome().equals("") && paciente.getDataNascimento() != null) {
+			model.addAttribute("mensagem", new Mensagem(
+					"Erro ao cadastrar o paciente, o nome deve ser preenchido.", TipoMensagem.ERRO));
+		}
+		
+		else if(!paciente.getNome().equals("") && paciente.getDataNascimento() == null) {
+			model.addAttribute("mensagem", new Mensagem(
+					"Erro ao cadastrar o paciente, a data de nascimento deve ser preenchida.", TipoMensagem.ERRO));
+		}
+		
+		else {
+			pacienteRepository.salvaPaciente(paciente);
+			model.addAttribute("paciente", new Paciente());
+			model.addAttribute("mensagem", new Mensagem(
+					"Sucesso ao cadastrar o paciente", TipoMensagem.SUCESSO));
+		}
+		
+		
 		return "cadastrarPaciente";
 	}
 

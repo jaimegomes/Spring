@@ -23,11 +23,41 @@ public class MedicoController {
 
 	@RequestMapping(value = "/cadastrar.do", method = RequestMethod.POST)
 	public String cadastrar(Medico medico, Model model) {
-		medicoRepository.salvaMedico(medico);
-		model.addAttribute("medico", new Medico());
+
 		model.addAttribute("especialidades", Especialidade.values());
-		model.addAttribute("mensagem", new Mensagem(
-				"Sucesso ao cadastrar o médico", TipoMensagem.SUCESSO));
+
+		if (medico.getNome() == null || medico.getNome().equals("")
+				&& medico.getEspecialidade() != null) {
+			model.addAttribute("mensagem", new Mensagem(
+					"Erro ao cadastrar médico, o nome deve ser preenchido.",
+					TipoMensagem.ERRO));
+		}
+
+		else if (medico.getEspecialidade() == null
+				&& !medico.getNome().equals("")) {
+			model.addAttribute(
+					"mensagem",
+					new Mensagem(
+							"Erro ao cadastrar médico, a especialidade deve ser preenchida",
+							TipoMensagem.ERRO));
+		}
+
+		else if (medico.getEspecialidade() == null
+				&& medico.getNome().equals("")) {
+			model.addAttribute(
+					"mensagem",
+					new Mensagem(
+							"Erro ao cadastrar médico. Você deve preencher todos os campos do formulário para cadastrar um médico.",
+							TipoMensagem.ERRO));
+		}
+
+		else {
+			medicoRepository.salvaMedico(medico);
+			model.addAttribute("medico", new Medico());
+			model.addAttribute("mensagem", new Mensagem(
+					"Sucesso ao cadastrar o médico.", TipoMensagem.SUCESSO));
+
+		}
 		return "cadastrarMedico";
 	}
 
@@ -42,7 +72,7 @@ public class MedicoController {
 	public String excluir(Integer idMedico, Model model) {
 		medicoRepository.excluiMedico(idMedico);
 		model.addAttribute("mensagem", new Mensagem(
-				"Sucesso ao excluir o médico", TipoMensagem.SUCESSO));
+				"Sucesso ao excluir o médico.", TipoMensagem.SUCESSO));
 		return "forward:/medico/listar.do";
 	}
 
