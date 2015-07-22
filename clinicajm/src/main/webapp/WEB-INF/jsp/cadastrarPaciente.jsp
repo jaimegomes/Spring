@@ -5,23 +5,29 @@
 	uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<tiles:insertDefinition name="template">  <tiles:putAttribute
-		name="corpo">  <h1>Cadastrar Paciente</h1>  <springform:form
-			method="post"
+<tiles:insertDefinition name="template">
+	<tiles:putAttribute name="corpo">
+		<h1>Cadastrar Paciente</h1>
+		<springform:form method="post"
 			action="${pageContext.request.contextPath}/paciente/cadastrar.do"
-			modelAttribute="paciente">  <div
-				style="width: 300px;">
-				
+			modelAttribute="paciente">
+			<div style="width: 300px;">
+
 				<div class="form-group">
-					 <label for="nome">Nome:</label> 
+					<label for="nome">Nome:</label>
 					<springform:input id="nome" path="nome" cssClass="form-control" />
 				</div>
 				<div class="form-group">
-					 <label for="dataNascimento">Data de Nascimento
-						(DD/MM/AAAA):</label> 
+					<label for="dataNascimento">Data de Nascimento
+						(DD/MM/AAAA):</label>
 					<springform:input id="dataNascimento" path="dataNascimento"
-						maxlength="10" cssClass="form-control" OnKeyPress="formatar('##/##/####', this)" />
+						type="text" maxlength="10"
+						cssClass="form-control" />
 				</div>
-			</div>  <input type="submit" value="Gravar" class="btn btn-primary" />  </springform:form>  </tiles:putAttribute>  </tiles:insertDefinition>
+			</div>
+			<input type="submit" value="Gravar" class="btn btn-primary" />
+		</springform:form>
+	</tiles:putAttribute>
+</tiles:insertDefinition>
 </html>
 
