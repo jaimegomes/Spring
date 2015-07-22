@@ -32,6 +32,11 @@ public class PacienteController {
 					"Erro ao cadastrar o paciente, a data de nascimento deve ser preenchida.", TipoMensagem.ERRO));
 		}
 		
+		else if(paciente.getNome().equals("") && paciente.getDataNascimento() == null) {
+			model.addAttribute("mensagem", new Mensagem(
+					"Erro ao cadastrar o paciente, Você deve preencher todos os campos do formulário para cadastrar um paciente.", TipoMensagem.ERRO));
+		}
+		
 		else {
 			pacienteRepository.salvaPaciente(paciente);
 			model.addAttribute("paciente", new Paciente());

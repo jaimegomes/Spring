@@ -27,7 +27,7 @@
 
 			</button>
 			<a class="navbar-brand"
-				href="${pageContext.request.contextPath}/index.jsp">Iní­cio</a>
+				href="${pageContext.request.contextPath}/index.jsp">Início</a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="navbar-1">
